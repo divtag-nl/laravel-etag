@@ -1,4 +1,4 @@
-# Laravel Etag
+# Laravel ETag
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/divtag/laravel-etag.svg?style=flat-square)](https://packagist.org/packages/divtag/laravel-etag)
 [![Build Status](https://img.shields.io/travis/divtag/laravel-etag/master.svg?style=flat-square)](https://travis-ci.org/divtag/laravel-etag)
