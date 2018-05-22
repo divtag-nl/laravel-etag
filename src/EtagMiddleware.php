@@ -17,9 +17,6 @@ class EtagMiddleware
     {
         $response = $next($request);
 
-        // TODO: Handle POST/PUT?!
-        // TODO: Handle If-Match?!
-
         return $this->isEtagable($request)
             ? $this->handleWithEtag($request, $response)
             : $response;
