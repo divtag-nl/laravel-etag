@@ -5,7 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/divtag-nl/laravel-etag.svg?style=flat-square)](https://scrutinizer-ci.com/g/divtag-nl/laravel-etag)
 [![Total Downloads](https://img.shields.io/packagist/dt/divtag/laravel-etag.svg?style=flat-square)](https://packagist.org/packages/divtag/laravel-etag)
 
-This package provides a middleware which can automatically generate and add an `ETag` header to responses and respond with a `304 Not Modified` response when needed. 
+This package provides a middleware which can automatically generate and add an [`ETag`](https://en.wikipedia.org/wiki/HTTP_ETag) header to responses and respond with a `304 Not Modified` response when needed. 
 
 ## Installation
 
