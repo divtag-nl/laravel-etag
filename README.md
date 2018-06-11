@@ -48,6 +48,10 @@ If you discover any security related issues, please email machiel@divtag.nl inst
 
 - [All Contributors](../../contributors)
 
+## About us
+
+[Divtag](https://www.divtag.nl/) is a digital agency based in Drunen, the Netherlands. As part of [MPO Ventures](https://www.mpo-ventures.com/) we are working day in, day out at very exciting projects and products. Having any questions about our services or open vacancies? Feel free to contact us.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
