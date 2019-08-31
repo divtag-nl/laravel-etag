@@ -48,26 +48,9 @@ class EtagMiddleware
 
         $ifNoneMatch = $request->headers->get('If-None-Match');
 
-        return $ifNoneMatch !== null && $this->doesMatch($etag, $ifNoneMatch)
+        return $ifNoneMatch !== null && Etag::match($etag, $ifNoneMatch)
             ? $response->setNotModified()
             : $response;
-    }
-
-    /**
-     * @param string $etag
-     * @param string $match
-     * @return bool
-     */
-    protected function doesMatch(string $etag, string $match): bool
-    {
-        if ($match === '*') {
-            return true;
-        }
-
-        // Get request etags
-        preg_match_all('/(W\/)?".+?"/', $match, $matches);
-
-        return in_array($etag, $matches[0]);
     }
 
     /**
@@ -76,8 +59,6 @@ class EtagMiddleware
      */
     protected function generateEtag(Response $response): string
     {
-        $hash = hash('md5', $response->getContent(), true);
-
-        return 'W/"' . rtrim(base64_encode($hash), '=') . '"';
+        return (new Etag())->update($response->getContent())->get();
     }
 }

@@ -17,7 +17,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foobar', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testResponseWithEtag()
@@ -37,7 +37,7 @@ class EtagMiddlewareTest extends TestCase
     {
         $request = new Request();
 
-        $request->headers->set('If-None-Match', 'W/"idVzm6q7vmW+NcvmHIjgbQ"');
+        $request->headers->set('If-None-Match', 'W/"ewNGvnm6aFbTvqRq+jhVMg"');
 
         $response = (new EtagMiddleware())->handle($request, function () {
             return new Response('Foobar');
@@ -45,7 +45,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(304, $response->getStatusCode());
         $this->assertEquals('', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testRequestWithWrongEtag()
@@ -60,7 +60,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foobar', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testHeadRequestWithAndResponseWithoutEtag()
@@ -68,7 +68,7 @@ class EtagMiddlewareTest extends TestCase
         $request = new Request();
 
         $request->setMethod('HEAD');
-        $request->headers->set('If-None-Match', 'W/"idVzm6q7vmW+NcvmHIjgbQ"');
+        $request->headers->set('If-None-Match', 'W/"ewNGvnm6aFbTvqRq+jhVMg"');
 
         $response = (new EtagMiddleware())->handle($request, function () {
             return new Response('Foobar');
@@ -76,7 +76,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(304, $response->getStatusCode());
         $this->assertEquals('', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testRequestWithAndResponseWithEtag()
@@ -121,7 +121,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foobar', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testRequestMultiple1()
@@ -136,7 +136,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foobar', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testRequestMultiple2()
@@ -158,7 +158,7 @@ class EtagMiddlewareTest extends TestCase
     {
         $request = new Request();
 
-        $request->headers->set('If-None-Match', 'W/"Foo", W/"idVzm6q7vmW+NcvmHIjgbQ"');
+        $request->headers->set('If-None-Match', 'W/"Foo", W/"ewNGvnm6aFbTvqRq+jhVMg"');
 
         $response = (new EtagMiddleware())->handle($request, function () {
             return new Response('Foobar');
@@ -166,7 +166,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(304, $response->getStatusCode());
         $this->assertEquals('', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testIfNoneMatchWildcard()
@@ -181,7 +181,7 @@ class EtagMiddlewareTest extends TestCase
 
         $this->assertEquals(304, $response->getStatusCode());
         $this->assertEquals('', $response->getContent());
-        $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
+        $this->assertEquals('W/"ewNGvnm6aFbTvqRq+jhVMg"', $response->getEtag());
     }
 
     public function testIf304isNotEtagable()
