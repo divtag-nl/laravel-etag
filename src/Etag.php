@@ -2,6 +2,8 @@
 
 namespace Divtag\LaravelEtag;
 
+use Illuminate\Support\Facades\Request;
+
 class Etag
 {
     /**
@@ -20,6 +22,16 @@ class Etag
         }
 
         return $this;
+    }
+
+    /**
+     * @throws NotModifiedException
+     */
+    public function abortIfMatch()
+    {
+        if (Request::hasHeader('If-None-Match') && self::match($this->get(), Request::header('If-None-Match'))) {
+            throw  new NotModifiedException();
+        }
     }
 
     /**
