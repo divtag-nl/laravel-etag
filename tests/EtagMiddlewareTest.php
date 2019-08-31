@@ -183,4 +183,16 @@ class EtagMiddlewareTest extends TestCase
         $this->assertEquals('', $response->getContent());
         $this->assertEquals('W/"idVzm6q7vmW+NcvmHIjgbQ"', $response->getEtag());
     }
+
+    public function testIf304isNotEtagable()
+    {
+        $request = new Request();
+
+        $response = (new EtagMiddleware())->handle($request, function () {
+            return (new Response())->setNotModified();
+        });
+
+        $this->assertEquals(304, $response->getStatusCode());
+        $this->assertEquals(null, $response->headers->get('Etag'));
+    }
 }

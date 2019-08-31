@@ -17,18 +17,20 @@ class EtagMiddleware
     {
         $response = $next($request);
 
-        return $this->isEtagable($request)
+        return $this->isEtagable($request, $response)
             ? $this->handleWithEtag($request, $response)
             : $response;
     }
 
     /**
-     * @param Request $request
+     * @param Request  $request
+     * @param Response $response
      * @return bool
      */
-    protected function isEtagable(Request $request): bool
+    protected function isEtagable(Request $request, Response $response): bool
     {
-        return in_array($request->getMethod(), ['GET', 'HEAD']);
+        return in_array($request->getMethod(), ['GET', 'HEAD'])
+            && $response->getStatusCode() !== 304;
     }
 
     /**
