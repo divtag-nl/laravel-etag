@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "Divtag\\LaravelEtag\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "require": {
         "php": "^7.0",
