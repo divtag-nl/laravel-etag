@@ -1,6 +1,8 @@
 <?php
 
 use Divtag\LaravelEtag\Etag;
+use Divtag\LaravelEtag\NotModifiedException;
+use Illuminate\Support\Facades\Request;
 use PHPUnit\Framework\TestCase;
 
 class EtagTest extends TestCase
@@ -25,5 +27,22 @@ class EtagTest extends TestCase
         $this->assertTrue(Etag::match('W/"eV56Zr5eoP/U7I7Jcz0eqA"', '*'));
         $this->assertTrue(Etag::match('W/"eV56Zr5eoP/U7I7Jcz0eqA"', 'W/"eV56Zr5eoP/U7I7Jcz0eqA"'));
         $this->assertNotTrue(Etag::match('W/"eV56Zr5eoP/U7I7Jcz0eqA"', 'W/"IxOA6WjYzl6NEGujTjAjVg"'));
+    }
+
+    public function testAbortIfMatch()
+    {
+        Request::shouldReceive('hasHeader')
+            ->once()
+            ->with('If-None-Match')
+            ->andReturn(true);
+
+        Request::shouldReceive('header')
+            ->once()
+            ->with('If-None-Match')
+            ->andReturn('W/"eV56Zr5eoP/U7I7Jcz0eqA"');
+
+        $this->expectException(NotModifiedException::class);
+
+        (new Etag())->update('asd')->abortIfMatch();
     }
 }
